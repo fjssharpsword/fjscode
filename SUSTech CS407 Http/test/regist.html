@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <meta http-equiv="Access-Control-Allow-Methods" content="POST" />
+    <meta http-equiv="Access-Control-Allow-Headers" content="accept, content-type" />
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="user_name" placeholder="请输入用户名" value=""/>
+<input type="password" id="password" placeholder="请输入密码" value=""/>
+<input type="button" onclick="login()" value="注册">
+<script src="./jquery-3.4.1.min.js"></script>
+<script>
+    //jQuery.support.cors = true;
+    function login() {
+        var user_name = document.getElementById("user_name").value;
+        var password = document.getElementById("password").value;
+        console.log("Register name:"+user_name);
+        //console.log(password);
+        var dt = {"user_name": user_name, "password": password};
+        $.ajax({
+        	/* headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }, */
+            type: "POST",
+            url: "http://127.0.0.1:8082/regist",
+            // 预期服务器响应的数据类型
+            dataType: "JSON",
+            data: JSON.stringify(dt),
+            success: function (result) {
+            	//if(result['status'] == 0){
+            	//	window.location.href＝"http://127.0.0.1:8082/registSuccess";
+            	//}
+                //console.log(eval("'" + arg + "'"));
+                console.log(result['msg']);
+            },
+            error: function(ht){
+            	console.log("error");
+            }
+        })
+    }
+</script>
+</body>
+</html>
